@@ -22,7 +22,7 @@
  
 defined('MOODLE_INTERNAL') || die();
  
-$plugin->version = 2018051100;
+$plugin->version = 20190901;
 $plugin->requires = 2014111000;
 $plugin->cron = 0;
 $plugin->component = 'mod_observationtest';
