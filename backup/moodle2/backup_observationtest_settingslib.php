@@ -26,7 +26,7 @@ class backup_observationtest_activity_structure_step extends backup_activity_str
     protected function define_structure() {
 
         // Define the root element describing the observationtest instance
-        $observationtest = new backup_nested_element('observationtests', array('id'), array('course', 'category', 'complexity', 'intro', 'introformat', 'timecreated', 'timemodified'));
+        $observationtest = new backup_nested_element('observationtest', array('id'), array('course', 'category', 'complexity', 'intro', 'introformat', 'timecreated', 'timemodified'));
         $observationtest->set_source_table('observationtest', array('id' => backup::VAR_ACTIVITYID));
 
         // Define the observation test categories
