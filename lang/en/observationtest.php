@@ -8,6 +8,7 @@
 
  $string['pluginname'] = 'Observation and attention';
  $string['modulename'] = 'Observation and attention';
+ $string['observationtest'] = 'Observation and attention';
  $string['observationtestname'] = 'Name';
  $string['modulename_help'] = 'This module allows to exercise the student\'s visual attention and quantify it in three possible levels:
 * easy
