@@ -8,21 +8,16 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-/*
- * Defines complexity ranges
- * 
- * @param stdClass $complexity
- * 
- */
-$complexityranges = array(
-    1 => get_string('easy','observationtext'),
-    2 => get_string('medium','observationtext'),
-    3 => get_string('advanced','observationtext'));
-
-function get_categories() {
+function get_complexity_ranges(){
     return array(
-        array('id' => '1', 'category' => 'Test 1'),
-        array('id' => '2', 'category' => 'Test 2'),
-        array('id' => '3', 'category' => 'Test 3')
-    );
+    1 => get_string('easy','observationtest'),
+    2 => get_string('medium','observationtest'),
+    3 => get_string('advanced','observationtest'));
+}
+
+function get_observationtest_categories() {
+    global $USER, $DB;
+
+    $query = 'SELECT id, category FROM mdl_observation_categories';
+    return $DB->get_records_sql_menu($query);
 }

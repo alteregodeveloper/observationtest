@@ -11,21 +11,26 @@ if (!defined('MOODLE_INTERNAL')) {
 }
  
 require_once($CFG->dirroot.'/course/moodleform_mod.php');
-require_once($CFG->dirroot.'/mod/observationtext/lib.php');
-require_once($CFG->dirroot.'/mod/observationtext/locallib.php');
+require_once($CFG->dirroot.'/mod/observationtest/lib.php');
+require_once($CFG->dirroot.'/mod/observationtest/locallib.php');
  
-class mod_observationtext_mod_form extends moodleform_mod {
+class mod_observationtest_mod_form extends moodleform_mod {
  
     function definition() {
         global $CFG, $DB, $OUTPUT;
  
         $mform =& $this->_form;
+
+        $mform->addElement('text', 'name', get_string('vatname', 'vat'), array('size'=>'64'));
+        $mform->setType('name', PARAM_TEXT);
+        $mform->addRule('name', null, 'required', null, 'client');
  
-        $categories = get_categories();
-        $mform->addElement('select', 'category', get_string('category', 'observationtext'), $categories);
+        $categories = get_observationtest_categories();
+        $mform->addElement('select', 'category', get_string('category', 'observationtest'), $categories);
         $mform->setDefault('category', 1);
 
-        $mform->addElement('select', 'complexity', get_string('complexity', 'observationtext'), $complexityranges);
+        $complexityranges = get_complexity_ranges();
+        $mform->addElement('select', 'complexity', get_string('complexity', 'observationtest'), $complexityranges);
         $mform->setDefault('complexity', 1);
 
         $this->standard_intro_elements();

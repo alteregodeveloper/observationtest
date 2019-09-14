@@ -6,17 +6,17 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
- $string['pluginname'] = 'Test de observación y atención';
- $string['modulename'] = 'Test de observación y atención';
- $string['observationtest'] = 'Test de observación y atención';
- $string['mod_observationtest'] = 'Test de observación y atención';
- $string['observationtestname'] = 'Nombre';
- $string['modulename_help'] = 'Éste módulo permite ejercitar la observación y atención del estudiante y cuantificarlo en tres posibles niveles:
- * fácil
- * intermedio
- * avanzado';
- $string['complexity'] = 'Complejidad';
- $string['easy'] = 'Fácil';
- $string['medium'] = 'Intermedio';
- $string['advanced'] = 'Avanzado';
- 
+$string['pluginname'] = 'Test de observación y atención';
+$string['modulename'] = 'Test de observación y atención';
+$string['observationtest'] = 'Test de observación y atención';
+$string['mod_observationtest'] = 'Test de observación y atención';
+$string['observationtestname'] = 'Nombre';
+$string['modulename_help'] = 'Éste módulo permite ejercitar la observación y atención del estudiante y cuantificarlo en tres posibles niveles:
+* fácil
+* intermedio
+* avanzado';
+$string['category'] = 'Categoria';
+$string['complexity'] = 'Complejidad';
+$string['easy'] = 'Fácil';
+$string['medium'] = 'Intermedio';
+$string['advanced'] = 'Avanzado';
