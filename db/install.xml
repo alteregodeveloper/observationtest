@@ -21,7 +21,7 @@
       </KEYS>
       <INDEXES>
         <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
-        <INDEX NAME="category" UNIQUE="false" FIELDS="category"/>
+        <INDEX NAME="observation_categories" UNIQUE="false" FIELDS="category"/>
       </INDEXES>
     </TABLE>
     <TABLE NAME="observation_categories" COMMENT="Defines Observation Tests Categories">
@@ -49,7 +49,7 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for observation_cases" />
       </KEYS>
       <INDEXES>
-        <INDEX NAME="category" UNIQUE="false" FIELDS="category"/>
+        <INDEX NAME="observation_categories" UNIQUE="false" FIELDS="category"/>
       </INDEXES>
     </TABLE>
     <TABLE NAME="observation_questions" COMMENT="Defines Observation Tests questions">
