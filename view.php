@@ -41,10 +41,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                     show_alert('danger','File extension is not supported. Select an image with extension jpeg, jpg, png or gif');
                     show_addcase_form($cm->id);
                 } else {
-                    $upload_dir = $CFG->dataroot . '/observationtest/cases/';
-                    if (!file_exists($upload_dir)) {
-                        mkdir($upload_dir, 0777, true);
-                    }
+                    $upload_dir = $CFG->dirroot . '/mod/observationtest/cases/';
                     $currentDate = new DateTime();
                     $filename = $currentDate->getTimestamp() . '.' . $extension_file;
                     $upload_file = $upload_dir . basename($filename);
@@ -52,6 +49,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $caseid = set_case($_POST['category'],$_POST['complexity'],$filename);
                         if($caseid > 0) {
                             show_alert('success','The file was saved successfully. Now you can create the questions');
+                            $loadfile = $CFG->wwwroot . '/mod/observationtest/cases/' . basename($filename);
+                            show_addquestion_form($caseid,$_POST['categoryname'],$_POST['complexityname'],$loadfile);
+                        } else {
+                            show_alert('danger','An error occurred while trying to save the image. Try again');
+                            show_addcase_form($cm->id);
                         }
                     } else {
                         show_alert('danger','An error occurred while trying to save the image. Try again');
