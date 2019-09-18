@@ -26,4 +26,13 @@ $(function () {
             }, 1000)
         })
     })
+
+    if($('#newCase').length > 0) {
+        $('select[name="category"]').on('change', function() {
+            $('input[name="categoryname"]').val($(this).find(":selected").text());
+        })
+        $('select[name="complexity"]').on('change', function() {
+            $('input[name="complexityname"]').val($(this).find(":selected").text());
+        })
+    }
 })

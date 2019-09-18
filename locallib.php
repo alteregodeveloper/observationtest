@@ -74,3 +74,7 @@ function set_category($category) {
         echo json_encode(array('status' => 'danger', 'message' => 'It was not possible to create a new category'));
     }
 }
+
+function show_addquestion_form($caseid,$category,$complexity,$upload_file) {
+    require_once('localview/addquestion_form.php');
+}
