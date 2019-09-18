@@ -75,6 +75,6 @@ function set_category($category) {
     }
 }
 
-function show_addquestion_form($caseid,$category,$complexity,$upload_file) {
+function show_addquestion_form($observationtestid,$caseid,$category,$complexity,$upload_file) {
     require_once('localview/addquestion_form.php');
 }
