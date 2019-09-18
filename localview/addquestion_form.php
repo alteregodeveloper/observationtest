@@ -44,8 +44,14 @@
         </div>
         <div class="row">
             <div class="col border-top pt-3 text-right">
-                <a href="<?= '//' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '?id=' . $observationtestid ?>" class="btn btn-secondary">Cancel</a> <a href="" class="btn btn-primary addquestion">Add new question</a>
+                <a href="<?= '//' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '?id=' . $observationtestid ?>" class="btn btn-secondary">Exit</a> <a href="" class="btn btn-primary addquestion">Add new question</a>
             </div>
         </div>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col border-top pt-3 border-bottom pb-3 mb-3">
+        <h4>Questions</h4>
+        <div id="question-container"></div>
     </div>
 </div>
