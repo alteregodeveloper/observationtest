@@ -1,16 +1,17 @@
 <form action="" method="POST" enctype="multipart/form-data" id="newCase">
-<input type="hidden" name="action" value="addcase">
+    <input type="hidden" name="action" value="addcase">
     <div class="row">
         <div class="col">
             <label for="category">Category</label>
             <div class="form-row">
                 <div class="form-group col-10">
-                <select name="category" id="category" class="form-control">
-                    <option value=""> - </option>
-                <?php foreach($categories as $key => $category): ?>
-                    <option value="<?= $key ?>"><?= $category ?></option>
-                <?php endforeach; ?>
-                </select>        
+                    <select name="category" id="category" class="form-control">
+                        <option value=""> - </option>
+                    <?php foreach($categories as $key => $category): ?>
+                        <option value="<?= $key ?>"><?= $category ?></option>
+                    <?php endforeach; ?>
+                    </select>
+                    <input type="hidden" name="categoryname" value="">       
                 </div>
                 <div class="form-group col-2">
                     <a class="btn btn-primary" data-toggle="modal" data-target="#categoryModal"><i class="fas fa-plus"></i></a>
@@ -25,6 +26,7 @@
                 <option value="<?= $key ?>"><?= $range ?></option>
             <?php endforeach; ?>
             </select>
+            <input type="hidden" name="complexityname" value="">
         </div>
     </div>
     <div class="row">
@@ -32,8 +34,9 @@
         <div class="col">
         <label for="customFile">Image</label>
             <div class="custom-file">
-                <input type="file" name="customFile" class="custom-file-input" id="customFile">
+                <input type="file" name="customFile" class="custom-file-input" id="customFile" required>
                 <label class="custom-file-label" for="customFile">Choose file</label>
+                <p class="text-info">* Only support  jpeg, jpg, png or gif extension</p>
             </div>
         </div>
     </div>
