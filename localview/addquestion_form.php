@@ -14,9 +14,11 @@
         <div class="row mt-3">
             <div class="col border-top pt-3">
                 <form action="" method="POST" class="form" id="newQuestion">
-                    <div class="form-group">
+                    <input type="hidden" name="caseid" value="<?= $caseid ?>">
+                    <div class="form-group" id="question">
+                        <div class="alert hide" role="alert"></div>
                         <label for="question">Question</label>
-                        <textarea class="form-control" name="question" id="question" rows="3"></textarea>
+                        <textarea class="form-control" name="question" rows="3"></textarea>
                     </div>
                     <div class="form-group" id="answers">
                         <label for="question">Answers</label>

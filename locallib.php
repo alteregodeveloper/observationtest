@@ -78,3 +78,19 @@ function set_category($category) {
 function show_addquestion_form($observationtestid,$caseid,$category,$complexity,$upload_file) {
     require_once('localview/addquestion_form.php');
 }
+
+function set_question($caseid,$question) {
+    global $DB;
+    $record = new stdClass();
+    $record->caseid = $caseid;
+    $record->intro = $question;
+    $currentDate = new DateTime();
+    $record->timecreated = $currentDate->getTimestamp();
+    $record->timemodified = $currentDate->getTimestamp();
+    $questionid = $DB->insert_record('observation_questions', $record, true);
+    if($questionid > 0) {
+        echo json_encode(array('status' => 'success', 'message' => 'Question successfully added', 'questionid' => $questionid, 'question' => $question));
+    } else {
+        echo json_encode(array('status' => 'danger', 'message' => 'It was not possible to create a new question'));
+    }
+}

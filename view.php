@@ -14,6 +14,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     if(isset($_POST['action'])) {
         if($_POST['action'] == 'addcategory') {
             echo set_category($_POST['category']);
+        } else if($_POST['action'] == 'addquestion') {
+            echo set_question($_POST['caseid'],$_POST['question']);
         } else if($_POST['action'] == 'addcase') {
             $id = required_param('id', PARAM_INT);
             list ($course, $cm) = get_course_and_cm_from_cmid($id, 'observationtest');
