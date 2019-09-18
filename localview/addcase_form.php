@@ -36,7 +36,7 @@
             <div class="custom-file">
                 <input type="file" name="customFile" class="custom-file-input" id="customFile" required>
                 <label class="custom-file-label" for="customFile">Choose file</label>
-                <p class="text-info">* Only support  jpeg, jpg, png or gif extension</p>
+                <small class="form-text text-muted">* Only support  jpeg, jpg, png or gif extension</small>
             </div>
         </div>
     </div>
