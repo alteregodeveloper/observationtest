@@ -50,7 +50,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                         if($caseid > 0) {
                             show_alert('success','The file was saved successfully. Now you can create the questions');
                             $loadfile = $CFG->wwwroot . '/mod/observationtest/cases/' . basename($filename);
-                            show_addquestion_form($caseid,$_POST['categoryname'],$_POST['complexityname'],$loadfile);
+                            show_addquestion_form($cm->id,$caseid,$_POST['categoryname'],$_POST['complexityname'],$loadfile);
+                            
                         } else {
                             show_alert('danger','An error occurred while trying to save the image. Try again');
                             show_addcase_form($cm->id);
@@ -61,23 +62,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 }
             }
-            /*
-            if($case['id'] > 0) {
-                echo $OUTPUT->heading('Add new question');
-            } else {
-                echo $OUTPUT->heading('Add new case');
-                show_addcase_form($cm->id);
-            }*/
-            
-
-
             $PAGE->requires->js(new moodle_url('https://code.jquery.com/jquery-3.4.1.min.js'));
             $PAGE->requires->js(new moodle_url('https://kit.fontawesome.com/8368a92b51.js'));
             $PAGE->requires->js(new moodle_url('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js'));
             $PAGE->requires->js(new moodle_url('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'));
             $PAGE->requires->js(new moodle_url($CFG->wwwroot . '/mod/observationtest/assets/js/observationtest.js'));
             echo $OUTPUT->footer();
-
         }
     }
 } else {
