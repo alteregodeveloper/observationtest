@@ -94,3 +94,20 @@ function set_question($caseid,$question) {
         echo json_encode(array('status' => 'danger', 'message' => 'It was not possible to create a new question'));
     }
 }
+
+function set_answer($questionid,$correct,$intro) {
+    global $DB;
+    $record = new stdClass();
+    $record->questionid = $questionid;
+    $record->correct = $correct;
+    $record->intro = $intro;
+    $currentDate = new DateTime();
+    $record->timecreated = $currentDate->getTimestamp();
+    $record->timemodified = $currentDate->getTimestamp();
+    $answerid = $DB->insert_record('observation_answers', $record, true);
+    if($answerid > 0) {
+        echo json_encode(array('status' => 'success', 'correct' => $correct, 'answer' => $intro));
+    } else {
+        echo json_encode(array('status' => 'warning'));
+    }
+}
