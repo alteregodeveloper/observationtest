@@ -48,7 +48,7 @@ function show_addcasesbutton() {
 function show_case($observationtestid) {
     global $DB;
 
-    $query = 'SELECT mdl_observation_cases.id, mdl_observation_cases.intro FROM mdl_observation_cases INNER JOIN mdl_observationtest ON mdl_observation_cases.categoryid = mdl_observationtest.category AND mdl_observation_cases.complexity = mdl_observationtest.complexity WHERE mdl_observationtest.id = ' . $observationtestid . ' ORDER BY RAND() LIMIT 1';
+    $query = 'SELECT mdl_observation_cases.id, mdl_observation_cases.intro FROM mdl_observation_cases INNER JOIN mdl_observationtest ON mdl_observation_cases.category = mdl_observationtest.category AND mdl_observation_cases.complexity = mdl_observationtest.complexity WHERE mdl_observationtest.id = ' . $observationtestid . ' ORDER BY RAND() LIMIT 1';
     return $DB->get_record_sql($query);
 }
 
@@ -61,7 +61,7 @@ function show_addcase_form($activity) {
 function set_case($category,$complexity,$customFile) {
     global $DB;
     $record = new stdClass();
-    $record->categoryid = $category;
+    $record->category = $category;
     $record->complexity = $complexity;
     $record->intro = $customFile;
     $currentDate = new DateTime();

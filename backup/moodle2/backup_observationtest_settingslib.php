@@ -37,7 +37,7 @@ class backup_observationtest_activity_structure_step extends backup_activity_str
 
         // Define the observation cases elements
         $cases = new backup_nested_element('cases');
-        $case = new backup_nested_element('case', array('id'), array('categoryid', 'complexity', 'intro', 'introformat', 'timecreated', 'timemodified'));
+        $case = new backup_nested_element('case', array('id'), array('category', 'complexity', 'intro', 'introformat', 'timecreated', 'timemodified'));
 
         $questions = new backup_nested_element('questions');
         $question = new backup_nested_element('question', array('id'), array('caseid', 'intro', 'introformat', 'timecreated', 'timemodified'));
