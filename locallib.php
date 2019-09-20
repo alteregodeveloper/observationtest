@@ -22,6 +22,24 @@ function get_observationtest_categories() {
     return $DB->get_records_sql_menu($query);
 }
 
+function get_user_can_edit($roles) {
+    if($roles) {
+        $role = key($roles);
+        $shortname = $roles[$role]->shortname;
+        if($shortname == 'manager' || $shortname == 'coursecreator' || $shortname == 'editingteacher') {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    } else {
+        if(is_siteadmin()) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+}
+
 function show_addcasesbutton() {
     $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     echo '<div class="newcasses" style="text-align: right"><a class="printicon" title="Add new case" href="' . $current_url . '&action=addcase"><i class="far fa-plus-square"></i> Add new case</a></div>';
