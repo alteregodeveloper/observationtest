@@ -16,7 +16,7 @@ function get_complexity_ranges(){
 }
 
 function get_observationtest_categories() {
-    global $USER, $DB;
+    global $DB;
 
     $query = 'SELECT id, category FROM mdl_observation_categories';
     return $DB->get_records_sql_menu($query);
@@ -45,15 +45,11 @@ function show_addcasesbutton() {
     echo '<div class="newcasses" style="text-align: right"><a class="printicon" title="Add new case" href="' . $current_url . '&action=addcase"><i class="far fa-plus-square"></i> Add new case</a></div>';
 }
 
-function show_case() {
-    echo '<div class="yui3-g">
-    <div class="yui3-u" id="nav">
-        <p>Test A</p>
-    </div>
-    <div class="yui3-u" id="main">
-        <p>Test b</p>
-    </div>
-</div>';
+function show_case($observationtestid) {
+    global $DB;
+
+    $query = 'SELECT mdl_observation_cases.id, mdl_observation_cases.intro FROM mdl_observation_cases INNER JOIN mdl_observationtest ON mdl_observation_cases.categoryid = mdl_observationtest.category AND mdl_observation_cases.complexity = mdl_observationtest.complexity WHERE mdl_observationtest.id = ' . $observationtestid . ' ORDER BY RAND() LIMIT 1';
+    return $DB->get_record_sql($query);
 }
 
 function show_addcase_form($activity) {
