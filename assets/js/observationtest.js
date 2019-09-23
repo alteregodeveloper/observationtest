@@ -44,6 +44,10 @@ $(function () {
         add_answer()
         post_question()
     }
+
+    if ($('#start-test').length > 0) {
+        run_test()
+    }
 })
 
 
@@ -51,11 +55,11 @@ function add_answer() {
     $('.addanswer').unbind().on('click', function (ev) {
         ev.preventDefault()
         var elementNumber = parseInt($(this).data('element')) + 1
-        if(elementNumber === 2) {
+        if (elementNumber === 2) {
             $(this).hide()
         } else {
             $(this).remove()
-        }        
+        }
         $('#answers').append('<div class="row mb-3 remove-answer"><div class="col-10"><div class="input-group mb-3"><div class="input-group-prepend"><div class="input-group-text"><input type="checkbox" name="correctansw_' + elementNumber + '" aria-label="Checked is the correct answer"></div></div><input type="text" class="form-control" name="answ_' + elementNumber + '" aria-label="Text input with checkbox"></div></div><div class="col-1"><a href="" class="btn btn-primary addanswer" title="Add new answer" data-element="' + elementNumber + '"><i class="fas fa-plus"></i></a></div></div>')
         $('input[name="answ_' + elementNumber + '"]').focus()
         add_answer()
@@ -91,9 +95,9 @@ function post_question() {
                         var intro = $(this).find('input[type="text"]')
                         var correctValue = 0
                         var introValue = intro.val()
-                        
+
                         $(this).find('input[type="text"]').val('')
-                        if(correct.prop("checked") == true) {
+                        if (correct.prop("checked") == true) {
                             correctValue = 1
                             correct.prop('checked', false);
                         }
@@ -111,13 +115,13 @@ function post_question() {
                             .done(function (data) {
                                 if (data.status === 'success') {
                                     var anwserText = ''
-                                    if(correctValue) {
+                                    if (correctValue) {
                                         anwserText = '<div class="row m-1 p-2 bg-success rounded text-white">' + introValue + '</div>'
                                     } else {
                                         anwserText = '<div class="row m-1 p-2 border-bottom">' + introValue + '</div>'
                                     }
                                     $('.row.align-items-center.p-1.bg-light.mb-3.rounded').last().find('.anserws').append(anwserText)
-                                    answersNumber ++
+                                    answersNumber++
                                 } else {
                                     $('#question .alert').html('An error occurred while saving the answers. It was only possible to store the first ' + answersNumber)
                                     $('#question .alert').removeClass('alert-' + questionStatus)
@@ -134,6 +138,73 @@ function post_question() {
                     $('#question .alert').addClass('hide')
                     $('#question .alert').removeClass('alert-' + questionStatus)
                 }, 2000)
+            })
+    })
+}
+
+function run_test() {
+    $('#start-test').on('click', function (ev) {
+        ev.preventDefault()
+        $(this).closest('.row').addClass('hide')
+        $('#case-content').removeClass('hide')
+        var timeOut = $('input[name="complexity"]').val() * 1000
+        setTimeout(function () {
+            $('#case-content').addClass('hide')
+            $('#case-questions').removeClass('hide')
+            set_radio()
+            check_test()
+        }, timeOut)
+    })
+}
+
+function set_radio() {
+    $('.answer').unbind().on('click', function (ev) {
+        ev.preventDefault()
+        $(this).closest('.question').find('input.quiz-value').val($(this).data('correct'))
+        $(this).closest('.question').find('i.fa-check-square').addClass('fa-square')
+        $(this).closest('.question').find('i.fa-check-square').removeClass('fa-check-square')
+        $(this).find('i').removeClass('fa-square')
+        $(this).find('i').addClass('fa-check-square')
+    })
+}
+
+function check_test() {
+    $('#case-questions form').on('submit', function (ev) {
+        ev.preventDefault()
+        var quizResult = 0
+        $('input.quiz-value').each(function(i) {
+            quizResult += parseInt($(this).val())
+        })
+        var resultQuiz = (quizResult * 10) / ($('input.quiz-value').length)
+        $.ajax({
+                method: 'POST',
+                url: window.location.href,
+                dataType: 'JSON',
+                data: {
+                    testid: $('input[name="testid"]').val(),
+                    caseid: $('input[name="caseid"]').val(),
+                    result: resultQuiz,
+                    action: 'addresult'
+                }
+            })
+            .done(function (data) {
+                if (data.status === 'success') {
+                    var alertColor = '';
+                    if(parseInt(data.result) < 6) {
+                        alertColor = 'alert-danger';
+                    } else if(parseInt(data.result) >= 6 && parseInt(data.result) < 8) {
+                        alertColor = 'alert-warning';
+                    } else if(parseInt(data.result) > 8) {
+                        alertColor = 'alert-success';
+                    }
+                    $('#case-questions').find('.alert').addClass(alertColor);
+                    $('#case-questions').find('.alert').html('Your result is ' + quizResult + ' of ' + $('input.quiz-value').length)
+                    $('#case-questions').find('.alert').removeClass('hide')
+                    $('#case-questions button').remove()
+                } else {
+                    $('#case-questions').find('.alert').addClass(data.status);
+                    $('#case-questions').find('.alert').html(data.message);
+                }
             })
     })
 }

@@ -10,9 +10,9 @@ defined('MOODLE_INTERNAL') || die;
 
 function get_complexity_ranges(){
     return array(
-    1 => get_string('easy','observationtest'),
-    2 => get_string('medium','observationtest'),
-    3 => get_string('advanced','observationtest'));
+    6 => get_string('easy','observationtest'),
+    4 => get_string('medium','observationtest'),
+    2 => get_string('advanced','observationtest'));
 }
 
 function get_observationtest_categories() {
@@ -45,11 +45,23 @@ function show_addcasesbutton() {
     echo '<div class="newcasses" style="text-align: right"><a class="printicon" title="Add new case" href="' . $current_url . '&action=addcase"><i class="far fa-plus-square"></i> Add new case</a></div>';
 }
 
-function show_case($observationtestid) {
+function show_case($observationtestid,$complexity,$observationroute) {
     global $DB;
 
     $query = 'SELECT mdl_observation_cases.id, mdl_observation_cases.intro FROM mdl_observation_cases INNER JOIN mdl_observationtest ON mdl_observation_cases.category = mdl_observationtest.category AND mdl_observation_cases.complexity = mdl_observationtest.complexity WHERE mdl_observationtest.id = ' . $observationtestid . ' ORDER BY RAND() LIMIT 1';
-    return $DB->get_record_sql($query);
+    $case = $DB->get_record_sql($query);
+
+    $image_route = $observationroute . $case->intro;
+    $qnas = '';
+
+    $query = 'SELECT id, caseid, intro FROM mdl_observation_questions WHERE caseid = ' . $case->id . ' ORDER BY RAND()';
+    $questions = $DB->get_records_sql($query);
+    foreach($questions as $question) {
+        $query = 'SELECT id, questionid, correct, intro FROM mdl_observation_answers WHERE questionid = ' . $question->id . ' ORDER BY RAND()';
+        $answers = $DB->get_records_sql($query);
+        $qnas .= question_show($question,$answers);
+    }
+    require_once('localview/case_exercise.php');
 }
 
 function show_addcase_form($activity) {
@@ -123,5 +135,32 @@ function set_answer($questionid,$correct,$intro) {
         echo json_encode(array('status' => 'success', 'correct' => $correct, 'answer' => $intro));
     } else {
         echo json_encode(array('status' => 'warning'));
+    }
+}
+
+function question_show($question,$answers) {
+    $html = '<div class="form-group question border-bottom mb-5"><input type="hidden" class="quiz-value" name="quiz_' . $question->id . '" value="0"><p>' . $question->intro . '</p>';  
+    foreach($answers as $answer) {
+        $html .= '<p class="answer" data-correct="' . $answer->correct . '"><i class="fas fa-square"></i> ' .$answer->intro . '</p class="answer">';
+    }
+    $html .= '</div>';
+    return $html;
+}
+
+function set_result($userid,$testid,$caseid,$result) {
+    global $DB;
+    $record = new stdClass();
+    $record->userid = $userid;
+    $record->testid = $testid;
+    $record->caseid = $caseid;
+    $record->result = $result;
+    $currentDate = new DateTime();
+    $record->timecreated = $currentDate->getTimestamp();
+    $record->timemodified = $currentDate->getTimestamp();
+    $answerid = $DB->insert_record('observation_result', $record, true);
+    if($answerid > 0) {
+        echo json_encode(array('status' => 'success', 'result' => $result));
+    } else {
+        echo json_encode(array('status' => 'warning', 'message' => 'It was not possible to save the result'));
     }
 }

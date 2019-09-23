@@ -71,6 +71,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $PAGE->requires->js(new moodle_url('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'));
                 $PAGE->requires->js(new moodle_url($CFG->wwwroot . '/mod/observationtest/assets/js/observationtest.js'));
                 echo $OUTPUT->footer();
+            } else if($_POST['action'] == 'addresult') {
+                echo set_result($USER->id,$_POST['testid'],$_POST['caseid'],$_POST['result']);
             }
         }
     }
@@ -95,7 +97,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo $OUTPUT->heading($observationtest->name);
         echo $observationtest->intro;
-        print_r(show_case($observationtest->id));
+        show_case($observationtest->id,$observationtest->complexity,$CFG->wwwroot . '/mod/observationtest/cases/');
     }
     $PAGE->requires->js(new moodle_url('https://code.jquery.com/jquery-3.4.1.min.js'));
     $PAGE->requires->js(new moodle_url('https://kit.fontawesome.com/8368a92b51.js'));
