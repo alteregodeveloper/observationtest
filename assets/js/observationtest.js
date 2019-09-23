@@ -205,6 +205,7 @@ function check_test() {
                     $('#case-questions').find('.alert').addClass(data.status);
                     $('#case-questions').find('.alert').html(data.message);
                 }
+                $('html, body').animate( {scrollTop : 0}, 800 );
             })
     })
 }
