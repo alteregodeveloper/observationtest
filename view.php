@@ -83,7 +83,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $PAGE->set_heading(format_string($course->fullname));
     $PAGE->set_context($modulecontext);
     echo $OUTPUT->header();
-    if(!$useredit) {
+    if($useredit) {
         if(isset($_GET['action'])) {
             if($_GET['action'] == 'addcase') {
                 echo $OUTPUT->heading('Add new case');
