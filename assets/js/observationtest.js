@@ -96,39 +96,41 @@ function post_question() {
                         var correctValue = 0
                         var introValue = intro.val()
 
-                        $(this).find('input[type="text"]').val('')
-                        if (correct.prop("checked") == true) {
-                            correctValue = 1
-                            correct.prop('checked', false);
-                        }
-                        $.ajax({
-                                method: 'POST',
-                                url: window.location.href,
-                                dataType: 'JSON',
-                                data: {
-                                    questionid: data.questionid,
-                                    correct: correctValue,
-                                    intro: introValue,
-                                    action: 'addanswer'
-                                }
-                            })
-                            .done(function (data) {
-                                if (data.status === 'success') {
-                                    var anwserText = ''
-                                    if (correctValue) {
-                                        anwserText = '<div class="row m-1 p-2 bg-success rounded text-white">' + introValue + '</div>'
-                                    } else {
-                                        anwserText = '<div class="row m-1 p-2 border-bottom">' + introValue + '</div>'
+                        if (introValue !== '') {
+                            $(this).find('input[type="text"]').val('')
+                            if (correct.prop("checked") == true) {
+                                correctValue = 1
+                                correct.prop('checked', false);
+                            }
+                            $.ajax({
+                                    method: 'POST',
+                                    url: window.location.href,
+                                    dataType: 'JSON',
+                                    data: {
+                                        questionid: data.questionid,
+                                        correct: correctValue,
+                                        intro: introValue,
+                                        action: 'addanswer'
                                     }
-                                    $('.row.align-items-center.p-1.bg-light.mb-3.rounded').last().find('.anserws').append(anwserText)
-                                    answersNumber++
-                                } else {
-                                    $('#question .alert').html('An error occurred while saving the answers. It was only possible to store the first ' + answersNumber)
-                                    $('#question .alert').removeClass('alert-' + questionStatus)
-                                    $('#question .alert.hide').addClass('alert-' + data.status)
-                                    return false
-                                }
-                            })
+                                })
+                                .done(function (data) {
+                                    if (data.status === 'success') {
+                                        var anwserText = ''
+                                        if (correctValue) {
+                                            anwserText = '<div class="row m-1 p-2 bg-success rounded text-white">' + introValue + '</div>'
+                                        } else {
+                                            anwserText = '<div class="row m-1 p-2 border-bottom">' + introValue + '</div>'
+                                        }
+                                        $('.row.align-items-center.p-1.bg-light.mb-3.rounded').last().find('.anserws').append(anwserText)
+                                        answersNumber++
+                                    } else {
+                                        $('#question .alert').html('An error occurred while saving the answers. It was only possible to store the first ' + answersNumber)
+                                        $('#question .alert').removeClass('alert-' + questionStatus)
+                                        $('#question .alert.hide').addClass('alert-' + data.status)
+                                        return false
+                                    }
+                                })
+                        }
                     })
                     $('.remove-answer').remove()
                     $('.addanswer').show()
@@ -172,7 +174,7 @@ function check_test() {
     $('#case-questions form').on('submit', function (ev) {
         ev.preventDefault()
         var quizResult = 0
-        $('input.quiz-value').each(function(i) {
+        $('input.quiz-value').each(function (i) {
             quizResult += parseInt($(this).val())
         })
         var resultQuiz = (quizResult * 10) / ($('input.quiz-value').length)
@@ -190,11 +192,11 @@ function check_test() {
             .done(function (data) {
                 if (data.status === 'success') {
                     var alertColor = '';
-                    if(parseInt(data.result) < 6) {
+                    if (parseInt(data.result) < 6) {
                         alertColor = 'alert-danger';
-                    } else if(parseInt(data.result) >= 6 && parseInt(data.result) < 8) {
+                    } else if (parseInt(data.result) >= 6 && parseInt(data.result) < 8) {
                         alertColor = 'alert-warning';
-                    } else if(parseInt(data.result) > 8) {
+                    } else if (parseInt(data.result) > 8) {
                         alertColor = 'alert-success';
                     }
                     $('#case-questions').find('.alert').addClass(alertColor);
@@ -205,7 +207,9 @@ function check_test() {
                     $('#case-questions').find('.alert').addClass(data.status);
                     $('#case-questions').find('.alert').html(data.message);
                 }
-                $('html, body').animate( {scrollTop : 0}, 800 );
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 800);
             })
     })
 }
