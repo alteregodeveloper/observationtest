@@ -97,8 +97,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo $OUTPUT->heading($observationtest->name);
         echo $observationtest->intro;
-        show_case($observationtest->id,$observationtest->complexity,$CFG->wwwroot . '/mod/observationtest/cases/');
     }
+    show_case($observationtest->id,$observationtest->complexity,$CFG->wwwroot . '/mod/observationtest/cases/');
     $PAGE->requires->js(new moodle_url('https://code.jquery.com/jquery-3.4.1.min.js'));
     $PAGE->requires->js(new moodle_url('https://kit.fontawesome.com/8368a92b51.js'));
     $PAGE->requires->js(new moodle_url('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js'));
