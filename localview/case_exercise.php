@@ -13,7 +13,7 @@
         </div>
         <div class="row justify-content-center hide" id="case-questions">
             <div class="col-8 bg-light p-3 pl-5 rounded">
-                <div class="alert" role="alert"></div>
+                <div class="alert hide" role="alert"></div>
                 <form action="" class="form">
                     <input type="hidden" name="testid" value="<?= $observationtestid ?>">
                     <input type="hidden" name="caseid" value="<?= $case->id ?>">
