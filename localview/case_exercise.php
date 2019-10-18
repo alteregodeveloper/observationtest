@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col text-center mt-5 mb-5">
                 <a href="" class="btn btn-success btn-lg mt-5 mb-5" id="start-test"><i class="fas fa-camera-retro"></i>
-                    Start test</a>
+                    <?= get_string('start_test', 'observationtest') ?></a>
             </div>
         </div>
         <div class="row hide" id="case-content">
@@ -20,7 +20,7 @@
                     <input type="hidden" name="complexity" value="<?= $complexity ?>">
                     <?php echo $qnas; ?>
                     <div class="col text-right">
-                        <button type="submit" class="btn btn-primary">Check</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> <?= get_string('end_test', 'observationtest') ?></button>
                     </div>
                 </form>
             </div>

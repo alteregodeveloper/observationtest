@@ -42,7 +42,7 @@ function get_user_can_edit($roles) {
 
 function show_addcasesbutton() {
     $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    echo '<div class="newcasses" style="text-align: right"><a class="printicon" title="Add new case" href="' . $current_url . '&action=addcase"><i class="far fa-plus-square"></i> Add new case</a></div>';
+    echo '<div class="newcasses" style="text-align: right"><a class="printicon" title="Add new case" href="' . $current_url . '&action=addcase"><i class="far fa-plus-square"></i> ' . get_string('start_test', 'observationtest') . '</a></div>';
 }
 
 function show_case($observationtestid,$complexity,$observationroute) {
@@ -95,9 +95,9 @@ function set_category($category) {
     $record->timemodified = $currentDate->getTimestamp();
     $idcategory = $DB->insert_record('observation_categories', $record, true);
     if($idcategory > 0) {
-        echo json_encode(array('status' => 'success', 'message' => 'Category successfully added', 'idcategory' => $idcategory, 'category' => $category));
+        echo json_encode(array('status' => 'success', 'message' => get_string('category_added', 'observationtest'), 'idcategory' => $idcategory, 'category' => $category));
     } else {
-        echo json_encode(array('status' => 'danger', 'message' => 'It was not possible to create a new category'));
+        echo json_encode(array('status' => 'danger', 'message' => get_string('category_dont_added', 'observationtest')));
     }
 }
 
@@ -115,9 +115,9 @@ function set_question($caseid,$question) {
     $record->timemodified = $currentDate->getTimestamp();
     $questionid = $DB->insert_record('observation_questions', $record, true);
     if($questionid > 0) {
-        echo json_encode(array('status' => 'success', 'message' => 'Question successfully added', 'questionid' => $questionid, 'question' => $question));
+        echo json_encode(array('status' => 'success', 'message' => get_string('question_added', 'observationtest'), 'questionid' => $questionid, 'question' => $question));
     } else {
-        echo json_encode(array('status' => 'danger', 'message' => 'It was not possible to create a new question'));
+        echo json_encode(array('status' => 'danger', 'message' => get_string('question_dont_added', 'observationtest')));
     }
 }
 
@@ -134,7 +134,7 @@ function set_answer($questionid,$correct,$intro) {
     if($answerid > 0) {
         echo json_encode(array('status' => 'success', 'correct' => $correct, 'answer' => $intro));
     } else {
-        echo json_encode(array('status' => 'warning'));
+        echo json_encode(array('status' => 'warning', 'message' => get_string('error_answer', 'observationtest')));
     }
 }
 
@@ -161,6 +161,6 @@ function set_result($userid,$testid,$caseid,$result) {
     if($answerid > 0) {
         echo json_encode(array('status' => 'success', 'result' => $result));
     } else {
-        echo json_encode(array('status' => 'warning', 'message' => 'It was not possible to save the result'));
+        echo json_encode(array('status' => 'warning', 'message' => get_string('result_dont_save', 'observationtest')));
     }
 }

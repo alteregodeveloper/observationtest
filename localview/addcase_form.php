@@ -2,7 +2,7 @@
     <input type="hidden" name="action" value="addcase">
     <div class="row">
         <div class="col">
-            <label for="category">Category</label>
+            <label for="category"><?= get_string('category', 'observationtest') ?></label>
             <div class="form-row">
                 <div class="form-group col-10">
                     <select name="category" id="category" class="form-control">
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="col">
-            <label for="complexity">Complexity</label>
+            <label for="complexity"><?= get_string('complexity', 'observationtest') ?></label>
             <select name="complexity" id="complexity" class="form-control">
                 <option value=""> - </option>
                 <?php foreach($complexityranges as $key => $range): ?>
@@ -33,19 +33,19 @@
     <div class="row">
         <div class="col"></div>
         <div class="col">
-            <label for="customFile">Image</label>
+            <label for="customFile"><?= get_string('image', 'observationtest') ?></label>
             <div class="custom-file">
                 <input type="file" name="customFile" class="custom-file-input" id="customFile" required>
-                <label class="custom-file-label" for="customFile">Choose file</label>
-                <small class="form-text text-muted">* Only support jpeg, jpg, png or gif extension</small>
+                <label class="custom-file-label" for="customFile"><?= get_string('choose_file', 'observationtest') ?></label>
+                <small class="form-text text-muted">* <?= get_string('file_extension', 'observationtest') ?></small>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col text-right mt-5">
             <a href="<?= '//' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '?id=' . $activity ?>"
-                class="btn btn-secondary">Exit</a>
-            <button class="btn btn-primary" type="submit" id="add-case">Add new case</button>
+                class="btn btn-secondary"><?= get_string('exit', 'observationtest') ?></a>
+            <button class="btn btn-primary" type="submit" id="add-case"><?= get_string('add_new', 'observationtest') ?></button>
         </div>
     </div>
 </form>
@@ -53,7 +53,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="categoryModalLabel">New Category</h5>
+                <h5 class="modal-title" id="categoryModalLabel"><?= get_string('new_category', 'observationtest') ?></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -62,15 +62,15 @@
                 <div class="alert hide" role="alert"></div>
                 <form action="" method="POST">
                     <div class="form-group">
-                        <label for="category">Category name</label>
-                        <input type="text" name="category" id="newcategory" placeholder="new category name"
+                        <label for="category"><?= get_string('category_name', 'observationtest') ?></label>
+                        <input type="text" name="category" id="newcategory" placeholder="<?= get_string('new_category_name', 'observationtest') ?>"
                             class="form-control">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" id="add-category" class="btn btn-primary">Add category</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><?= get_string('close', 'observationtest') ?></button>
+                <button type="button" id="add-category" class="btn btn-primary"><?= get_string('add_category', 'observationtest') ?></button>
             </div>
         </div>
     </div>

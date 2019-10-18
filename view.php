@@ -41,7 +41,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $extension_file = pathinfo($_FILES['customFile']['name'],PATHINFO_EXTENSION);
                     if(!in_array(strtolower($extension_file),$extensions))
                     {
-                        show_alert('danger','File extension is not supported. Select an image with extension jpeg, jpg, png or gif');
+                        show_alert('danger',get_string('file_supported', 'observationtest'));
                         show_addcase_form($cm->id);
                     } else {
                         $upload_dir = $CFG->dirroot . '/mod/observationtest/cases/';
@@ -51,16 +51,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                         if (move_uploaded_file($_FILES['customFile']['tmp_name'], $upload_file)) {
                             $caseid = set_case($_POST['category'],$_POST['complexity'],$filename);
                             if($caseid > 0) {
-                                show_alert('success','The file was saved successfully. Now you can create the questions');
+                                show_alert('success',get_string('file_saved', 'observationtest'));
                                 $loadfile = $CFG->wwwroot . '/mod/observationtest/cases/' . basename($filename);
                                 show_addquestion_form($cm->id,$caseid,$_POST['categoryname'],$_POST['complexityname'],$loadfile);
                                 
                             } else {
-                                show_alert('danger','An error occurred while trying to save the image. Try again');
+                                show_alert('danger',get_string('try_image', 'observationtest'));
                                 show_addcase_form($cm->id);
                             }
                         } else {
-                            show_alert('danger','An error occurred while trying to save the image. Try again');
+                            show_alert('danger',get_string('try_image', 'observationtest'));
                             show_addcase_form($cm->id);
                         }
                     }
@@ -86,7 +86,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     if($useredit) {
         if(isset($_GET['action'])) {
             if($_GET['action'] == 'addcase') {
-                echo $OUTPUT->heading('Add new case');
+                echo $OUTPUT->heading(get_string('add_new', 'observationtest'));
                 show_addcase_form($cm->id);
             }
         }  else {
