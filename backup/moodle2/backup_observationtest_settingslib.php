@@ -62,7 +62,7 @@ class backup_observationtest_activity_structure_step extends backup_activity_str
 
         // Defines the observation results
         $results = new backup_nested_element('results');
-        $result = new backup_nested_element('result', array('id'), array('userid', 'testid', 'caseid', 'result', 'timecreated', 'timemodified'));
+        $result = new backup_nested_element('result', array('id'), array('userid', 'testid', 'caseid', 'exercise', 'result', 'timecreated', 'timemodified'));
 
         $observationtest->add_child($results);
         
