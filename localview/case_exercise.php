@@ -17,6 +17,7 @@
                 <form action="" class="form">
                     <input type="hidden" name="testid" value="<?= $observationtestid ?>">
                     <input type="hidden" name="caseid" value="<?= $case->id ?>">
+                    <input type="hidden" name="exercise" value="<?= $_GET['exe'] ?>">
                     <input type="hidden" name="complexity" value="<?= $complexity ?>">
                     <?php echo $qnas; ?>
                     <div class="col text-right">

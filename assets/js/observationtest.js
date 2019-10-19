@@ -189,6 +189,7 @@ function check_test() {
                 data: {
                     testid: $('input[name="testid"]').val(),
                     caseid: $('input[name="caseid"]').val(),
+                    exercise: $('input[name="exercise"]').val(),
                     result: resultQuiz,
                     action: 'addresult'
                 }
@@ -204,7 +205,7 @@ function check_test() {
                         alertColor = 'alert-success';
                     }
                     $('#case-questions').find('.alert').addClass(alertColor);
-                    $('#case-questions').find('.alert').html('Your result is ' + quizResult + ' of ' + $('input.quiz-value').length)
+                    $('#case-questions').find('.alert').html(data.message)
                     $('#case-questions').find('.alert').removeClass('hide')
                     $('#case-questions button').remove()
                 } else {

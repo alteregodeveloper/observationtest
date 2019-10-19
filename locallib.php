@@ -147,19 +147,21 @@ function question_show($question,$answers) {
     return $html;
 }
 
-function set_result($userid,$testid,$caseid,$result) {
+function set_result($userid,$testid,$caseid,$exercise,$result) {
     global $DB;
     $record = new stdClass();
     $record->userid = $userid;
     $record->testid = $testid;
     $record->caseid = $caseid;
+    $record->exercise = $exercise;
     $record->result = $result;
     $currentDate = new DateTime();
     $record->timecreated = $currentDate->getTimestamp();
     $record->timemodified = $currentDate->getTimestamp();
     $answerid = $DB->insert_record('observation_result', $record, true);
     if($answerid > 0) {
-        echo json_encode(array('status' => 'success', 'result' => $result));
+        $message = get_string('result_is', 'observationtest') . ' ' . $result;
+        echo json_encode(array('status' => 'success', 'message' => $message, 'result' => $result, 'exercise' => $exercise));
     } else {
         echo json_encode(array('status' => 'warning', 'message' => get_string('result_dont_save', 'observationtest')));
     }

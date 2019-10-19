@@ -72,7 +72,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $PAGE->requires->js(new moodle_url($CFG->wwwroot . '/mod/observationtest/assets/js/observationtest.js'));
                 echo $OUTPUT->footer();
             } else if($_POST['action'] == 'addresult') {
-                echo set_result($USER->id,$_POST['testid'],$_POST['caseid'],$_POST['result']);
+                echo set_result($USER->id,$_POST['testid'],$_POST['caseid'],$_POST['exercise'],$_POST['result']);
             }
         }
     }
