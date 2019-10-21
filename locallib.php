@@ -160,8 +160,8 @@ function set_result($userid,$testid,$caseid,$exercise,$result) {
     $record->timemodified = $currentDate->getTimestamp();
     $answerid = $DB->insert_record('observation_result', $record, true);
     if($answerid > 0) {
-        $message = get_string('result_is', 'observationtest') . ' ' . $result;
-        echo json_encode(array('status' => 'success', 'message' => $message, 'result' => $result, 'exercise' => $exercise));
+        $message = get_string('result_is', 'observationtest') . ' ' . round($result,2);
+        echo json_encode(array('status' => 'success', 'message' => $message, 'result' => round($result,2), 'exercise' => $exercise));
     } else {
         echo json_encode(array('status' => 'warning', 'message' => get_string('result_dont_save', 'observationtest')));
     }
