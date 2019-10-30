@@ -20,8 +20,8 @@ $modulecontext = context_module::instance($cm->id);
 $useredit = get_user_can_edit(get_user_roles($modulecontext, $USER->id));
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if($useredit) {
-        if(isset($_POST['action'])) {
+    if(isset($_POST['action'])) {
+        if($useredit) {
             if($_POST['action'] == 'addcategory') {
                 echo set_category($_POST['category']);
             } else if($_POST['action'] == 'addquestion') {
@@ -71,9 +71,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $PAGE->requires->js(new moodle_url('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'));
                 $PAGE->requires->js(new moodle_url($CFG->wwwroot . '/mod/observationtest/assets/js/observationtest.js'));
                 echo $OUTPUT->footer();
-            } else if($_POST['action'] == 'addresult') {
-                echo set_result($USER->id,$_POST['testid'],$_POST['caseid'],$_POST['exercise'],$_POST['result']);
             }
+        }
+        if($_POST['action'] == 'addresult') {
+            echo set_result($USER->id,$_POST['testid'],$_POST['caseid'],$_POST['exercise'],$_POST['result']);
         }
     }
 } else {
