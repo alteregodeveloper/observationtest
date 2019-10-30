@@ -8,6 +8,7 @@
 
 $string['pluginname'] = 'Test de atención visual';
 $string['modulename'] = 'Atención visual';
+$string['modulenameplural'] = 'Tests de atención visual';
 $string['observationtest'] = 'Atención visual';
 $string['mod_observationtest'] = 'Atención visual';
 $string['observationtestname'] = 'Nombre';

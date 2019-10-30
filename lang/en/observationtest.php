@@ -8,6 +8,7 @@
 
 $string['pluginname'] = 'Observation and attention test';
 $string['modulename'] = 'Observation and attention';
+$string['modulenameplural'] = 'Observation and attention tests';
 $string['observationtest'] = 'Observation and attention';
 $string['mod_observationtest'] = 'Observation and attention';
 $string['observationtestname'] = 'Name';
